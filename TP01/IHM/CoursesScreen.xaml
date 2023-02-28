@@ -1,13 +1,12 @@
-﻿<Window x:Class="IHM.MainWindow"
+﻿<Window x:Class="IHM.CoursesScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IHM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
+        Title="CoursesScreen" Height="450" Width="800">
     <Grid>
-        <Image Source="./Ressources/Images/background.jpg"/>
-        <Button Content="Edit Courses" Click="EditCourses" Height="30" Width="80"/>
+        <ListBox />
     </Grid>
 </Window>

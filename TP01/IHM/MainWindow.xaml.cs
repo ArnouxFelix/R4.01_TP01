@@ -30,5 +30,11 @@ namespace IHM
             noteBook = new NoteBook(courseDAO);
             InitializeComponent();
         }
+
+        private void EditCourses(object sender, RoutedEventArgs e)
+        {
+            CoursesScreen coursesScreen = new CoursesScreen(noteBook);
+            coursesScreen.Show();
+        }
     }
 }
