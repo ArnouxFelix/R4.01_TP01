@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Logic;
+using Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +22,12 @@ namespace IHM
     /// </summary>
     public partial class MainWindow : Window
     {
+        private NoteBook noteBook;
+        private ICourseDAO courseDAO;
         public MainWindow()
         {
+            courseDAO = new CourseDAO(@"C:\Users\33633\OneDrive - Université de Bourgogne\Documents\Semestre 4\R4.01 - Architecture logicielle\TP\TP01\DataBase.db");
+            noteBook = new NoteBook(courseDAO);
             InitializeComponent();
         }
     }
