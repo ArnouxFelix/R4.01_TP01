@@ -12,5 +12,15 @@
         {
             return this.courseDAO.ListAll();
         }
+
+        public Course NewCourse()
+        {
+            return new Course(courseDAO);
+        }
+
+        public void RemoveCourse(Course course)
+        {
+            courseDAO.Delete(course);
+        }
     }
 }

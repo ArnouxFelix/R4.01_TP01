@@ -28,7 +28,7 @@ namespace Storage
         {
             connection.Open();
             var command = connection.CreateCommand();
-            command.CommandText = "DELETE * FROM Course WHERE code=" + course.Code;
+            command.CommandText = "DELETE FROM Course WHERE code='" + course.Code+"'";
             command.ExecuteNonQuery();
             connection.Close();
         }
@@ -59,13 +59,14 @@ namespace Storage
         {
             connection.Open();
             var command = connection.CreateCommand();
-            command.CommandText = "UPDATE Course SET Name ='" + course.Name + "',Weight=" + course.Weight.ToString() + "'WHERE Code='" + course.Code + "'";
+            command.CommandText = "UPDATE Course SET Name ='" + course.Name + "',Weight=" + course.Weight.ToString() + " WHERE Code='" + course.Code + "'";
+            command.ExecuteNonQuery();
             connection.Close();
         }
 
         private Course Reader2Course(SQLiteDataReader reader)
         {
-            Course prof = new Course(this);
+            Course prof = new Course(this,true);
             prof.Code = reader["Code"].ToString();
             prof.Name = reader["Name"].ToString();
             prof.Weight = Convert.ToInt32(reader["Weight"]);

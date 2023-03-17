@@ -20,13 +20,31 @@ namespace IHM
     /// </summary>
     public partial class CourseScreen : Window
     {
-        public CourseScreen(NoteBook noteBook, Course course = null)
+        private Course course;
+        public CourseScreen(Course course = null)
         {
-            if(course != null)
-            {
-
-            }
+            this.course = course;
             InitializeComponent();
+            if (course.AlreadyExist)
+            {
+                this.CodeTextBox.Text = this.course.Code;
+                this.NameTextBox.Text = this.course.Name;
+                this.WeightTextBox.Text = this.course.Weight.ToString();
+            }
+        }
+
+        private void Ok(object sender, RoutedEventArgs e)
+        {
+            this.course.Code = this.CodeTextBox.Text;
+            this.course.Name = this.NameTextBox.Text;
+            this.course.Weight = Convert.ToInt32(this.WeightTextBox.Text);
+            this.course.Update();
+            this.Close();
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

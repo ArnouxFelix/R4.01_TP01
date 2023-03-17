@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IHM"
         mc:Ignorable="d"
-        Title="EditCourse" Height="450" Width="800">
+        Title="CourseScreen" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Code : " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+        <Label Content="Name : " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+        <Label Content="Weight : " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+        <Button x:Name="OkButton" Content="Ok" Margin="20" Grid.Row="3" Grid.Column="0" Click="Ok" />
+        <Button x:Name="CancelButton" Content="Cancel" Margin="20" Grid.Row="3" Grid.Column="1" Click="Cancel"/>
+        <TextBox x:Name="CodeTextBox" Text="" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Margin="20"/>
+        <TextBox x:Name="NameTextBox" Text="" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="20"/>
+        <TextBox x:Name="WeightTextBox" Text="" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="20"/>
     </Grid>
 </Window>

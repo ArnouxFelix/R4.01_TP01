@@ -32,6 +32,7 @@ namespace IHM
 
         private void Draw()
         {
+            ListeCourses.Items.Clear();
             courses = noteBook.ListCourses();
             foreach (Course course in courses)
             {
@@ -41,16 +42,18 @@ namespace IHM
 
         private void CreateCourse(object sender, RoutedEventArgs e)
         {
-            CourseScreen createNewCourse = new CourseScreen(noteBook);
-            createNewCourse.Show();
+            CourseScreen createNewCourse = new CourseScreen(noteBook.NewCourse());
+            createNewCourse.ShowDialog();
+            Draw();
         }
 
         private void EditCourse(object sender, RoutedEventArgs e)
         {
             if (ListeCourses.SelectedItem != null)
             {
-                CourseScreen edit = new CourseScreen(noteBook /*ListeCourses.SelectedItem*/);
-                edit.Show();
+                CourseScreen edit = new CourseScreen(ListeCourses.SelectedItem as Course);
+                edit.ShowDialog();
+                Draw();
             }
         }
 
@@ -58,7 +61,8 @@ namespace IHM
         {
             if (ListeCourses.SelectedItem != null)
             {
-                //noteBook.DeleteCourse(current);
+                Course current = ListeCourses.SelectedItem as Course;
+                noteBook.RemoveCourse(current);
             }
             Draw();
         }

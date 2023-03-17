@@ -9,6 +9,7 @@ namespace Logic
     public class Course
     {
         private ICourseDAO courseDAO;
+        private bool alreadyExist;
 
         private string code;
 
@@ -28,22 +29,31 @@ namespace Logic
         /// Coefficient de la matière
         /// </summary>
         public int Weight { get => weight; set => weight = value; }
+        public bool AlreadyExist { get => alreadyExist; set => alreadyExist = value; }
 
         /// <summary>
         /// Donne l'ordre de mettre à jour dans la BDD
         /// </summary>
         public void Update()
         {
-
+            if (alreadyExist)
+            {
+                courseDAO.Update(this);
+            }
+            else
+            {
+                courseDAO.Create(this);
+            }
         }
 
         /// <summary>
         /// Constructeur de Course
         /// </summary>
         /// <param name="dao"></param>
-        public Course(ICourseDAO dao)
+        public Course(ICourseDAO dao, bool exist = false)
         {
             courseDAO = dao;
+            AlreadyExist = exist;
         }
 
         public override string ToString()
