@@ -45,5 +45,10 @@ namespace Logic
         {
             courseDAO = dao;
         }
+
+        public override string ToString()
+        {
+            return String.Format("Code : "+this.Code+"   Name : "+this.Name+"   Weight : "+this.Weight.ToString());
+        }
     }
 }

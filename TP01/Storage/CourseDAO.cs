@@ -17,12 +17,20 @@ namespace Storage
 
         public void Create(Course course)
         {
-            throw new NotImplementedException();
+            connection.Open();
+            var command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Course(Code,Name,Weight) VALUES('" + course.Code + "','" + course.Name + "'," + course.Weight.ToString() + ")";
+            command.ExecuteNonQuery();
+            connection.Close();
         }
 
         public void Delete(Course course)
         {
-            throw new NotImplementedException();
+            connection.Open();
+            var command = connection.CreateCommand();
+            command.CommandText = "DELETE * FROM Course WHERE code=" + course.Code;
+            command.ExecuteNonQuery();
+            connection.Close();
         }
 
         public IEnumerable<Course> ListAll()
@@ -49,7 +57,10 @@ namespace Storage
 
         public void Update(Course course)
         {
-            throw new NotImplementedException();
+            connection.Open();
+            var command = connection.CreateCommand();
+            command.CommandText = "UPDATE Course SET Name ='" + course.Name + "',Weight=" + course.Weight.ToString() + "'WHERE Code='" + course.Code + "'";
+            connection.Close();
         }
 
         private Course Reader2Course(SQLiteDataReader reader)

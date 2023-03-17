@@ -7,5 +7,10 @@
         {
             this.courseDAO = courseDAO;
         }
+
+        public IEnumerable<Course> ListCourses()
+        {
+            return this.courseDAO.ListAll();
+        }
     }
 }

@@ -22,10 +22,45 @@ namespace IHM
     public partial class CoursesScreen : Window
     {
         private NoteBook noteBook;
+        private IEnumerable<Course> courses;
         public CoursesScreen(NoteBook noteBook)
         {
             this.noteBook = noteBook;
             InitializeComponent();
+            Draw();
+        }
+
+        private void Draw()
+        {
+            courses = noteBook.ListCourses();
+            foreach (Course course in courses)
+            {
+                ListeCourses.Items.Add(course);
+            }
+        }
+
+        private void CreateCourse(object sender, RoutedEventArgs e)
+        {
+            CourseScreen createNewCourse = new CourseScreen(noteBook);
+            createNewCourse.Show();
+        }
+
+        private void EditCourse(object sender, RoutedEventArgs e)
+        {
+            if (ListeCourses.SelectedItem != null)
+            {
+                CourseScreen edit = new CourseScreen(noteBook /*ListeCourses.SelectedItem*/);
+                edit.Show();
+            }
+        }
+
+        private void DeleteCourse(object sender, RoutedEventArgs e)
+        {
+            if (ListeCourses.SelectedItem != null)
+            {
+                //noteBook.DeleteCourse(current);
+            }
+            Draw();
         }
     }
 }
