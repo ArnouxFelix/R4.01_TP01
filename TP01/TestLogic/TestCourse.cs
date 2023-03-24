@@ -1,7 +1,8 @@
 namespace TestLogic
 {
-    public class UnitTest1
+    public class TestCourse
     {
+        //private ICourseDAO courseDAO;
         [Fact]
         public void TestCreate()
         {

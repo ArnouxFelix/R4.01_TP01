@@ -3,65 +3,54 @@ using System.Data.SQLite;
 
 namespace Storage
 {
-    public class CourseDAO : ICourseDAO
+    public class CourseDAO :BaseDAO, ICourseDAO
     {
-        private SQLiteConnection connection;
         /// <summary>
         /// Constructeur de CourseDAO
         /// </summary>
         /// <param name="fileName">chemin de la BDD</param>
-        public CourseDAO(string fileName)
+        public CourseDAO(string fileName):base(fileName)
         {
-            connection = new SQLiteConnection(@"DataSource=" + fileName);
         }
 
         public void Create(Course course)
         {
-            connection.Open();
-            var command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Course(Code,Name,Weight) VALUES('" + course.Code + "','" + course.Name + "'," + course.Weight.ToString() + ")";
-            command.ExecuteNonQuery();
-            connection.Close();
+            ExecuteNonQuery("INSERT INTO Course(Code,Name,Weight) VALUES('" + course.Code + "','" + course.Name + "'," + course.Weight.ToString() + ")");
         }
 
         public void Delete(Course course)
         {
-            connection.Open();
-            var command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM Course WHERE code='" + course.Code+"'";
-            command.ExecuteNonQuery();
-            connection.Close();
+            ExecuteNonQuery("DELETE FROM Course WHERE code='" + course.Code + "'");
         }
 
         public IEnumerable<Course> ListAll()
         {
-            connection.Open();
+            Connection.Open();
+            SQLiteDataReader reader = ExecuteQuery("SELECT * FROM Course");
             List<Course> courses = new List<Course>();
-            var command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Course";
-            using (var reader = command.ExecuteReader())
+            using (reader)
             {
                 while (reader.Read())
                 {
                     courses.Add(Reader2Course(reader));
                 }
             }
-            connection.Close();
+            Connection.Close();
             return courses;
         }
 
         public Course Read(string code)
         {
-            throw new NotImplementedException();
+            Course course;
+            Connection.Open();
+            course = Reader2Course(ExecuteQuery("SELECT * FROM Course WHERE Code ='" + code + "'"));
+            Connection.Close();
+            return course;
         }
 
         public void Update(Course course)
         {
-            connection.Open();
-            var command = connection.CreateCommand();
-            command.CommandText = "UPDATE Course SET Name ='" + course.Name + "',Weight=" + course.Weight.ToString() + " WHERE Code='" + course.Code + "'";
-            command.ExecuteNonQuery();
-            connection.Close();
+            ExecuteNonQuery("UPDATE Course SET Name ='" + course.Name + "',Weight=" + course.Weight.ToString() + " WHERE Code='" + course.Code + "'");
         }
 
         private Course Reader2Course(SQLiteDataReader reader)
